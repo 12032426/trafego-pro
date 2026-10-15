@@ -1,1 +1,679 @@
-# trafego-pro
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tráfego Pro | Painel de SEO e Visitas</title>
+  <meta name="description" content="Acompanhe seus sites, organize seus dados de tráfego e prepare a análise de SEO com o Tráfego Pro.">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fc;
+      color: #17243b;
+    }
+
+    header {
+      background: #101d3a;
+      color: white;
+      padding: 20px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .logo span { color: #43d9bd; }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 45px 6%;
+      background: linear-gradient(120deg, #101d3a, #234b82);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 45px);
+      margin: 10px 0;
+    }
+
+    .hero p {
+      color: #d5e1f5;
+      line-height: 1.7;
+      max-width: 680px;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: auto;
+      padding: 28px 20px;
+    }
+
+    section { scroll-margin-top: 20px; }
+
+    .card {
+      background: white;
+      border: 1px solid #e3eaf5;
+      border-radius: 13px;
+      padding: 22px;
+      box-shadow: 0 5px 18px #152b5008;
+      min-width: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .stats { margin: 20px 0 30px; }
+
+    .stat-label {
+      color: #64748b;
+      font-size: 14px;
+      margin: 0 0 12px;
+    }
+
+    .stat-value {
+      font-size: 27px;
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    .muted {
+      color: #718096;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .section-title { margin: 30px 0 16px; }
+
+    .notice {
+      background: #fff8df;
+      border: 1px solid #f0df9e;
+      border-radius: 10px;
+      padding: 15px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .auth {
+      max-width: 520px;
+      margin: 25px auto;
+      background: #10213d;
+      color: white;
+    }
+
+    .auth p { color: #d5e1f5; }
+
+    label {
+      display: block;
+      margin: 13px 0 7px;
+      font-size: 14px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd5e3;
+      border-radius: 7px;
+      font-size: 15px;
+      background: white;
+      color: #17243b;
+    }
+
+    button, .btn {
+      display: inline-block;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 7px;
+      background: #1769e0;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      margin: 8px 5px 0 0;
+    }
+
+    button:hover, .btn:hover { background: #0e53b9; }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .secondary { background: #40516c; }
+
+    .danger { background: #b42318; }
+
+    .site-item {
+      border: 1px solid #e3eaf5;
+      border-radius: 9px;
+      padding: 14px;
+      margin-top: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .site-item a {
+      color: #1769e0;
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    .status {
+      min-height: 22px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .hidden { display: none !important; }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #718096;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header { align-items: flex-start; flex-direction: column; }
+      main { padding: 20px 14px; }
+      .card { padding: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">Tráfego <span>Pro</span></div>
+    <nav>
+      <a href="#painel">Painel</a>
+      <a href="#acesso">Minha conta</a>
+      <a href="#sites">Meus sites</a>
+      <a href="#ferramentas">Ferramentas SEO</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div style="color:#43d9bd;font-weight:bold;">SEO INTELIGENTE</div>
+    <h1>Tráfego Pro</h1>
+    <p>
+      Organize seus sites em um só lugar e prepare seu painel
+      para acompanhar visitas, tráfego orgânico e desempenho
+      nos mecanismos de busca.
+    </p>
+    <a class="btn" href="#painel">Acessar painel</a>
+  </section>
+
+  <main>
+    <div class="notice">
+      <strong>Importante:</strong> as estatísticas de visitas ainda
+      não estão conectadas ao Google Analytics. Os números serão
+      apresentados somente quando a fonte de dados estiver configurada.
+    </div>
+
+    <section id="painel">
+      <h2 class="section-title">Visão geral do tráfego</h2>
+
+      <div class="grid stats">
+        <div class="card">
+          <p class="stat-label">Visitas totais</p>
+          <div class="stat-value">—</div>
+          <p class="muted">Aguardando Google Analytics</p>
+        </div>
+
+        <div class="card">
+          <p class="stat-label">Tráfego orgânico</p>
+          <div class="stat-value">—</div>
+          <p class="muted">Aguardando Google Analytics</p>
+        </div>
+
+        <div class="card">
+          <p class="stat-label">Acessos diretos</p>
+          <div class="stat-value">—</div>
+          <p class="muted">Aguardando Google Analytics</p>
+        </div>
+
+        <div class="card">
+          <p class="stat-label">Países e cidades</p>
+          <div class="stat-value">—</div>
+          <p class="muted">Aguardando dados geográficos</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="acesso">
+      <div class="card auth">
+        <h2>Acesse o Tráfego Pro</h2>
+        <p>Entre na sua conta ou crie uma nova.</p>
+
+        <form id="form-login">
+          <label for="tp-email">E-mail</label>
+          <input
+            id="tp-email"
+            type="email"
+            autocomplete="email"
+            placeholder="Seu e-mail"
+            required
+          >
+
+          <label for="tp-senha">Senha</label>
+          <input
+            id="tp-senha"
+            type="password"
+            autocomplete="current-password"
+            minlength="6"
+            placeholder="Sua senha"
+            required
+          >
+
+          <button id="tp-entrar" type="submit">Entrar</button>
+          <button id="tp-cadastrar" type="button">Criar conta</button>
+          <button id="tp-sair" type="button" class="secondary hidden">
+            Sair da conta
+          </button>
+
+          <p id="tp-mensagem" class="status" role="status" aria-live="polite">
+            Informe seu e-mail e senha.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <section id="sites">
+      <h2 class="section-title">Meus sites</h2>
+
+      <div class="card">
+        <p>
+          Entre na sua conta para cadastrar sites e consultar os
+          endereços que você já salvou.
+        </p>
+
+        <form id="form-site">
+          <label for="site-nome">Nome do site</label>
+          <input
+            id="site-nome"
+            type="text"
+            maxlength="150"
+            placeholder="Ex.: Baixar Jogos Completos"
+            required
+          >
+
+          <label for="site-url">Endereço do site</label>
+          <input
+            id="site-url"
+            type="url"
+            maxlength="2048"
+            placeholder="https://exemplo.com"
+            required
+          >
+
+          <button id="site-salvar" type="submit">Adicionar site</button>
+        </form>
+
+        <p id="site-mensagem" class="status" role="status" aria-live="polite">
+          Entre na sua conta para começar.
+        </p>
+
+        <div id="lista-sites"></div>
+      </div>
+    </section>
+
+    <section id="ferramentas">
+      <h2 class="section-title">Ferramentas SEO</h2>
+
+      <div class="grid">
+        <div class="card">
+          <div style="font-size:28px;">🔎</div>
+          <h3>Análise SEO</h3>
+          <p class="muted">
+            Área preparada para futuras análises de títulos,
+            descrições e conteúdo.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size:28px;">📈</div>
+          <h3>Tráfego orgânico</h3>
+          <p class="muted">
+            Prepare o acompanhamento das visitas provenientes
+            dos mecanismos de busca.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size:28px;">🌎</div>
+          <h3>Público e regiões</h3>
+          <p class="muted">
+            Área preparada para mostrar países e cidades
+            quando houver dados disponíveis.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Tráfego Pro — painel de organização e análise de sites.
+  </footer>
+
+  <script type="module">
+    import { createClient } from
+      'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const supabase = createClient(
+      'https://vjbjtxdthazcioedulns.supabase.co',
+      'sb_publishable_qovJYVACFg0JtRwZLRdEtA_dJDLGfPa'
+    );
+
+    const emailInput = document.getElementById('tp-email');
+    const senhaInput = document.getElementById('tp-senha');
+    const formLogin = document.getElementById('form-login');
+    const botaoEntrar = document.getElementById('tp-entrar');
+    const botaoCadastrar = document.getElementById('tp-cadastrar');
+    const botaoSair = document.getElementById('tp-sair');
+    const mensagem = document.getElementById('tp-mensagem');
+
+    const formSite = document.getElementById('form-site');
+    const nomeSite = document.getElementById('site-nome');
+    const urlSite = document.getElementById('site-url');
+    const botaoSalvar = document.getElementById('site-salvar');
+    const mensagemSite = document.getElementById('site-mensagem');
+    const listaSites = document.getElementById('lista-sites');
+
+    let usuarioAtual = null;
+    let operacaoLogin = false;
+    let carregamentoSites = false;
+
+    function mostrarMensagem(elemento, texto) {
+      elemento.textContent = texto;
+    }
+
+    function atualizarInterface() {
+      const conectado = Boolean(usuarioAtual);
+
+      botaoSair.classList.toggle('hidden', !conectado);
+      formSite.querySelectorAll('input, button').forEach((campo) => {
+        campo.disabled = !conectado || carregamentoSites;
+      });
+
+      if (!conectado) {
+        listaSites.replaceChildren();
+        mostrarMensagem(
+          mensagemSite,
+          'Entre na sua conta para visualizar seus sites.'
+        );
+      }
+    }
+
+    async function carregarSites() {
+      if (carregamentoSites) return;
+
+      if (!usuarioAtual) {
+        atualizarInterface();
+        return;
+      }
+
+      carregamentoSites = true;
+      atualizarInterface();
+      mostrarMensagem(mensagemSite, 'Carregando seus sites...');
+
+      try {
+        const { data, error } = await supabase
+          .from('sites')
+          .select('id, name, url')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        listaSites.replaceChildren();
+
+        for (const site of data || []) {
+          const item = document.createElement('div');
+          item.className = 'site-item';
+
+          const link = document.createElement('a');
+          link.href = site.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = site.name + ' — ' + site.url;
+
+          item.appendChild(link);
+          listaSites.appendChild(item);
+        }
+
+        mostrarMensagem(
+          mensagemSite,
+          data && data.length
+            ? 'Sites cadastrados: ' + data.length
+            : 'Nenhum site cadastrado nesta conta.'
+        );
+      } catch (error) {
+        console.error('Erro ao carregar sites:', error);
+        mostrarMensagem(
+          mensagemSite,
+          'Não foi possível carregar os sites. Verifique a tabela e as permissões do Supabase.'
+        );
+      } finally {
+        carregamentoSites = false;
+        atualizarInterface();
+      }
+    }
+
+    formLogin.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (operacaoLogin) return;
+
+      operacaoLogin = true;
+      botaoEntrar.disabled = true;
+      botaoCadastrar.disabled = true;
+      mostrarMensagem(mensagem, 'Verificando seus dados...');
+
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: emailInput.value.trim(),
+          password: senhaInput.value
+        });
+
+        if (error) throw error;
+
+        usuarioAtual = data.user;
+        mostrarMensagem(mensagem, 'Login realizado com sucesso!');
+        await carregarSites();
+      } catch (error) {
+        mostrarMensagem(mensagem, 'Erro no login: ' + error.message);
+      } finally {
+        operacaoLogin = false;
+        botaoEntrar.disabled = false;
+        botaoCadastrar.disabled = false;
+      }
+    });
+
+    botaoCadastrar.addEventListener('click', async () => {
+      if (operacaoLogin) return;
+
+      if (!emailInput.value.trim() || senhaInput.value.length < 6) {
+        mostrarMensagem(
+          mensagem,
+          'Informe um e-mail válido e uma senha com pelo menos 6 caracteres.'
+        );
+        return;
+      }
+
+      operacaoLogin = true;
+      botaoEntrar.disabled = true;
+      botaoCadastrar.disabled = true;
+      mostrarMensagem(mensagem, 'Criando sua conta...');
+
+      try {
+        const { data, error } = await supabase.auth.signUp({
+          email: emailInput.value.trim(),
+          password: senhaInput.value
+        });
+
+        if (error) throw error;
+
+        if (data.session) {
+          usuarioAtual = data.user;
+          mostrarMensagem(mensagem, 'Conta criada com sucesso!');
+          await carregarSites();
+        } else {
+          mostrarMensagem(
+            mensagem,
+            'Cadastro iniciado. Confira seu e-mail para confirmar a conta antes de entrar.'
+          );
+        }
+      } catch (error) {
+        mostrarMensagem(mensagem, 'Erro no cadastro: ' + error.message);
+      } finally {
+        operacaoLogin = false;
+        botaoEntrar.disabled = false;
+        botaoCadastrar.disabled = false;
+      }
+    });
+
+    botaoSair.addEventListener('click', async () => {
+      botaoSair.disabled = true;
+
+      try {
+        const { error } = await supabase.auth.signOut();
+        if (error) throw error;
+
+        usuarioAtual = null;
+        atualizarInterface();
+        mostrarMensagem(mensagem, 'Você saiu da sua conta.');
+      } catch (error) {
+        mostrarMensagem(mensagem, 'Erro ao sair: ' + error.message);
+      } finally {
+        botaoSair.disabled = false;
+      }
+    });
+
+    formSite.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!usuarioAtual) {
+        mostrarMensagem(
+          mensagemSite,
+          'Entre na sua conta antes de cadastrar um site.'
+        );
+        return;
+      }
+
+      const nome = nomeSite.value.trim();
+      const enderecoInformado = urlSite.value.trim();
+
+      if (!nome || !enderecoInformado) {
+        mostrarMensagem(mensagemSite, 'Preencha os dois campos.');
+        return;
+      }
+
+      let endereco;
+
+      try {
+        endereco = new URL(enderecoInformado);
+      } catch {
+        mostrarMensagem(mensagemSite, 'Digite um endereço válido.');
+        return;
+      }
+
+      if (!['https:', 'http:'].includes(endereco.protocol)) {
+        mostrarMensagem(
+          mensagemSite,
+          'O endereço precisa começar com https:// ou http://.'
+        );
+        return;
+      }
+
+      botaoSalvar.disabled = true;
+      mostrarMensagem(mensagemSite, 'Salvando site...');
+
+      try {
+        const { data: sessaoData, error: sessaoErro } =
+          await supabase.auth.getSession();
+
+        if (sessaoErro) throw sessaoErro;
+
+        const sessao = sessaoData.session;
+
+        if (!sessao || sessao.user.id !== usuarioAtual.id) {
+          usuarioAtual = null;
+          atualizarInterface();
+          throw new Error('Entre novamente na sua conta.');
+        }
+
+        const { error } = await supabase.from('sites').insert({
+          user_id: usuarioAtual.id,
+          name: nome,
+          url: endereco.href
+        });
+
+        if (error) throw error;
+
+        formSite.reset();
+        mostrarMensagem(mensagemSite, 'Site cadastrado com sucesso!');
+        await carregarSites();
+      } catch (error) {
+        console.error('Erro ao salvar site:', error);
+        mostrarMensagem(
+          mensagemSite,
+          'Não foi possível salvar: ' + error.message
+        );
+      } finally {
+        botaoSalvar.disabled = !usuarioAtual;
+      }
+    });
+
+    supabase.auth.onAuthStateChange((evento, sessao) => {
+      usuarioAtual = sessao?.user || null;
+      atualizarInterface();
+
+      if (evento === 'SIGNED_IN' || evento === 'SIGNED_OUT' ||
+          evento === 'INITIAL_SESSION' || evento === 'USER_UPDATED') {
+        setTimeout(() => carregarSites(), 0);
+      }
+    });
+
+    try {
+      const { data, error } = await supabase.auth.getSession();
+
+      if (error) throw error;
+
+      usuarioAtual = data.session?.user || null;
+      atualizarInterface();
+      await carregarSites();
+    } catch (error) {
+      console.error('Erro ao verificar sessão:', error);
+      mostrarMensagem(
+        mensagem,
+        'Não foi possível verificar sua conta. Atualize a página e tente novamente.'
+      );
+    }
+  </script>
+</body>
+</html>
