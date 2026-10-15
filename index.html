@@ -241,12 +241,7 @@ document.getElementById('tp-entrar').onclick = async () => {
   mensagem.textContent = error
     ? error.message
     : 'Login realizado com sucesso!';
-};const formSite = document.getElementById('form-site');
-const nomeSite = document.getElementById('site-nome');
-const urlSite = document.getElementById('site-url');
-const mensagemSite = document.getElementById('site-mensagem');
 const listaSites = document.getElementById('lista-sites');
-
 async function carregarSites() {
   const { data: { user }, error: erroLogin } =
     await supabase.auth.getUser();
