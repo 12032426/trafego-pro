@@ -241,7 +241,105 @@ document.getElementById('tp-entrar').onclick = async () => {
   mensagem.textContent = error
     ? error.message
     : 'Login realizado com sucesso!';
-};
+};const formSite = document.getElementById('form-site');
+const nomeSite = document.getElementById('site-nome');
+const urlSite = document.getElementById('site-url');
+const mensagemSite = document.getElementById('site-mensagem');
+const listaSites = document.getElementById('lista-sites');
+
+async function carregarSites() {
+  const { data: { user }, error: erroLogin } =
+    await supabase.auth.getUser();
+
+  if (erroLogin || !user) {
+    mensagemSite.textContent =
+      'Entre na sua conta para cadastrar e visualizar seus sites.';
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from('sites')
+    .select('id, name, url')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    mensagemSite.textContent =
+      'Não foi possível carregar os sites: ' + error.message;
+    return;
+  }
+
+  listaSites.replaceChildren();
+
+  data.forEach(site => {
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+
+    link.href = site.url;
+    link.textContent = site.name + ' — ' + site.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+
+    item.appendChild(link);
+    listaSites.appendChild(item);
+  });
+
+  mensagemSite.textContent = data.length
+    ? 'Seus sites cadastrados: ' + data.length
+    : 'Você ainda não cadastrou nenhum site.';
+}
+
+formSite.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  mensagemSite.textContent = 'Salvando site...';
+
+  const { data: { user }, error: erroLogin } =
+    await supabase.auth.getUser();
+
+  if (erroLogin || !user) {
+    mensagemSite.textContent =
+      'Entre na sua conta antes de cadastrar um site.';
+    return;
+  }
+
+  const nome = nomeSite.value.trim();
+  let endereco;
+
+  try {
+    endereco = new URL(urlSite.value.trim());
+  } catch {
+    mensagemSite.textContent = 'Digite um endereço válido.';
+    return;
+  }
+
+  if (!['http:', 'https:'].includes(endereco.protocol)) {
+    mensagemSite.textContent =
+      'O endereço deve começar com https:// ou http://.';
+    return;
+  }
+
+  const { error } = await supabase.from('sites').insert({
+    user_id: user.id,
+    name: nome,
+    url: endereco.href
+  });
+
+  if (error) {
+    mensagemSite.textContent =
+      'Erro ao salvar: ' + error.message;
+    return;
+  }
+
+  formSite.reset();
+  await carregarSites();
+});
+
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+    carregarSites();
+  }
+});
+
+carregarSites();
 </script>
 <section id="painel-trafego-pro" style="max-width:1000px;margin:30px auto;padding:24px;background:#0b1730;color:white;border-radius:14px;font-family:Arial,sans-serif;">
   <h2 style="margin-top:0;">Painel Tráfego Pro</h2>
@@ -269,6 +367,27 @@ document.getElementById('tp-entrar').onclick = async () => {
   <p style="margin-bottom:0;color:#b8c7e0;font-size:13px;">
     Os números serão exibidos quando conectarmos uma fonte de estatísticas.
   </p>
+</section>
+<section id="cadastro-sites" style="max-width:900px;margin:30px auto;padding:24px;background:#fff;border-radius:12px;color:#222;">
+  <h2>Meus sites</h2>
+  <p>Cadastre um site para acompanhar suas estatísticas.</p>
+
+  <form id="form-site">
+    <label for="site-nome">Nome do site</label><br>
+    <input id="site-nome" type="text" placeholder="Meu site" required
+      style="width:100%;padding:12px;margin:8px 0 16px;box-sizing:border-box;">
+
+    <label for="site-url">Endereço do site</label><br>
+    <input id="site-url" type="url" placeholder="https://exemplo.com" required
+      style="width:100%;padding:12px;margin:8px 0 16px;box-sizing:border-box;">
+
+    <button type="submit" style="padding:12px 20px;cursor:pointer;">
+      Adicionar site
+    </button>
+    <p id="site-mensagem" role="status"></p>
+  </form>
+
+  <ul id="lista-sites"></ul>
 </section>
 </body>
 </html>
