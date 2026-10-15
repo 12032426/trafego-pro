@@ -246,11 +246,12 @@ async function carregarSites() {
   const { data: { user }, error: erroLogin } =
     await supabase.auth.getUser();
 
-  if (erroLogin || !user) {
-    mensagemSite.textContent =
-      'Entre na sua conta para cadastrar e visualizar seus sites.';
-    return;
-  }
+ mensagem.textContent = error
+    ? error.message
+    : 'Login realizado com sucesso!';
+};
+
+const listaSites = document.getElementById('lista-sites');
 
   const { data, error } = await supabase
     .from('sites')
