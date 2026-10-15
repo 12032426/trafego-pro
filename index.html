@@ -198,9 +198,50 @@
       </div>
     </section>
   </main>
+    
+  </foo
+   <section id="cadastro-trafego-pro" style="max-width:440px;margin:40px auto;padding:24px;background:#10213d;color:white;border-radius:12px;font-family:Arial,sans-serif;">
+    <h2>Acesse o Tráfego Pro</h2>
+    <p>Crie sua conta ou entre.</p>
+    <input id="tp-email" type="email" placeholder="Seu e-mail" style="display:block;width:95%;padding:12px;margin:10px 0;">
+    <input id="tp-senha" type="password" placeholder="Sua senha" style="display:block;width:95%;padding:12px;margin:10px 0;">
+    <button id="tp-cadastrar" type="button">Criar conta</button>
+    <button id="tp-entrar" type="button">Entrar</button>
+    <p id="tp-mensagem">Preencha seus dados.</p>
+  </section>
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-  <footer>
-    © 2026 Tráfego Pro · Plataforma de análise de tráfego e SEO
-  </footer>
+const supabase = createClient(
+  'https://vjbjtxdthazcioedulns.supabase.co',
+  'COLE_SUA_PUBLISHABLE_KEY_AQUI'
+);sb_publishable_qovJYVACFg0JtRwZLRdEtA_dJDLGfPa
+
+const email = document.getElementById('tp-email');
+const senha = document.getElementById('tp-senha');
+const mensagem = document.getElementById('tp-mensagem');
+
+document.getElementById('tp-cadastrar').onclick = async () => {
+  const { error } = await supabase.auth.signUp({
+    email: email.value.trim(),
+    password: senha.value
+  });
+
+  mensagem.textContent = error
+    ? error.message
+    : 'Cadastro iniciado! Confira seu e-mail para confirmar a conta.';
+};
+
+document.getElementById('tp-entrar').onclick = async () => {
+  const { error } = await supabase.auth.signInWithPassword({
+    email: email.value.trim(),
+    password: senha.value
+  });
+
+  mensagem.textContent = error
+    ? error.message
+    : 'Login realizado com sucesso!';
+};
+</script>
 </body>
 </html>
