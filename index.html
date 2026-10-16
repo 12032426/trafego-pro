@@ -504,7 +504,8 @@
 
         usuarioAtual = data.user;
         mostrarMensagem(mensagem, 'Login realizado com sucesso!');
-        await carregarSites();
+              await carregarSites();
+       document.getElementById('painel').scrollIntoView({ behavior: 'smooth' });
       } catch (error) {
         mostrarMensagem(mensagem, 'Erro no login: ' + error.message);
       } finally {
